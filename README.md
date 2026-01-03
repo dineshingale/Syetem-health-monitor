@@ -10,7 +10,15 @@ A multi-platform monitoring tool using Python, Bash, PowerShell, and YAML. It fe
 -   **REST API:** FastAPI backend for easy integration.
 -   **JSON Reports:** Automated report generation for historical tracking.
 
-## 📋 Prerequisites
+## � Screenshots
+
+![Dashboard Home](./screenshots/homeScreen.png)
+*Real-time Dashboard Home*
+
+![System Report](./screenshots/SystemReport.png)
+*Detailed System Report*
+
+## �📋 Prerequisites
 
 Ensure you have the following installed on your machine:
 -   **Python 3.8+**
