@@ -1,108 +1,91 @@
-# 📊 System Health Monitor (2025 Edition)
+# 📊 System Health Monitor (Enterprise Edition)
 
-A multi-platform monitoring tool using Python, Bash, PowerShell, and YAML. It features a modern web dashboard for real-time visualization of system metrics.
+A professional-grade, cross-platform infrastructure monitoring solution designed to track critical hardware metrics in real-time. Built with a **decoupled architecture**, it features a high-performance **FastAPI** backend and a responsive **React/Vite** dashboard.
 
-## 🚀 Features
+## 🚀 Key Engineering Features
 
--   **Cross-platform Support:** Works on Linux (via Bash) and Windows (via PowerShell).
--   **Config-driven:** Customizable thresholds via `config/settings.yaml`.
--   **Real-time Dashboard:** A modern, responsive UI built with Vite & TailwindCSS.
--   **REST API:** FastAPI backend for easy integration.
--   **JSON Reports:** Automated report generation for historical tracking.
+*   **Cross-Platform Architecture:**
+    *   **Windows:** Custom **PowerShell** collectors using WMI/CIM for granular hardware access.
+    *   **Linux:** Lightweight **Bash** daemons parsing `/proc` filesystem efficiently.
+*   **Real-Time Telemetry:**
+    *   Live WebSocket/Polling feeds for **CPU Usage, RAM Commitment, and IOPS**.
+    *   Visualized using **Chart.js / Recharts** for immediate anomaly detection.
+*   **Config-Driven Core:**
+    *   Thresholds and polling intervals defined in `config/settings.yaml` (Infrastructure-as-Code principles).
+*   **Microservice-Ready:** Separate Frontend and Backend services containerizable for scalable deployment.
 
-## � Screenshots
+## 🛠️ Tech Stack
+
+| Component | Technology | Role |
+| :--- | :--- | :--- |
+| **Backend** | Python 3.9+, FastAPI | REST API, Data Processing, Alert Logic |
+| **Frontend** | React, Vite, TailwindCSS | Reactive User Interface |
+| **Collectors** | PowerShell Core, Bash | Hardware-level Data Extraction |
+| **Config** | YAML | Dynamic Configuration |
+
+##  Architecture Overview
+
+```mermaid
+graph TD
+    A[Hardware Layer] -->|PowerShell/Bash| B(Data Collector Service);
+    B -->|JSON Payload| C{FastAPI Server};
+    C -->|REST/WebSockets| D[React Dashboard];
+    C -->|Alert Trigger| E[Log/Notification System];
+```
+
+##  Screenshots
 
 ![Dashboard Home](./screenshots/homeScreen.png)
-*Real-time Dashboard Home*
+*Real-time Operational Dashboard*
 
 ![System Report](./screenshots/SystemReport.png)
-*Detailed System Report*
+*Detailed Hardware Resource Analysis*
 
-## �📋 Prerequisites
+## 🛠️ Installation & Setup
 
-Ensure you have the following installed on your machine:
--   **Python 3.8+**
--   **Node.js 18+** & **npm**
-
-## 🛠️ Installation
-
-### 1. Backend Setup
-
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/System-health-monitor.git
-    cd System-health-monitor
-    ```
-
-2.  Create and activate a virtual environment (optional but recommended):
-    ```bash
-    # Windows
-    python -m venv .venv
-    .venv\Scripts\Activate.ps1
-
-    # Linux/Mac
-    python3 -m venv .venv
-    source .venv/bin/activate
-    ```
-
-3.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### 2. Frontend Setup
-
-1.  Navigate to the dashboard directory:
-    ```bash
-    cd dashboard
-    ```
-
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-
-## 🏃‍♂️ Running the Application
-
-You need to run both the backend API and the frontend dev server.
-
-### Start the Backend API
-
-From the root directory:
+### 1. Backend Service (API)
 ```bash
+# Clone
+git clone https://github.com/dineshingale/System-health-monitor.git
+cd System-health-monitor
+
+# Virtual Env & Dependencies
+python -m venv .venv
+# Windows: .venv\Scripts\Activate.ps1
+# Linux: source .venv/bin/activate
+pip install -r requirements.txt
+
+# Start API Server
 python -m uvicorn src.server:app --reload
 ```
-The API will be available at `http://localhost:8000`.
+*Server listening on `http://localhost:8000`*
 
-### Start the Dashboard
-
-From the `dashboard` directory:
+### 2. Frontend Service (Dashboard)
 ```bash
+cd dashboard
+npm install
 npm run dev
 ```
-The UI will be available at `http://localhost:5173`.
+*UI accessible at `http://localhost:5173`*
 
-## 📂 Project Structure
-
+## 📁 Repository Structure
 ```
 System-health-monitor/
-├── config/                 # Configuration files (settings.yaml)
-├── dashboard/              # Frontend (Vite + TailwindCSS)
-├── reports/                # Generated JSON reports
 ├── src/
-│   ├── collectors/         # Platform-specific scripts (Bash/PS1)
-│   ├── main.py             # Core logic & CLI entry point
-│   └── server.py           # FastAPI backend
-├── requirements.txt        # Python dependencies
-└── README.md
+│   ├── collectors/       # Native OS scripts (Hardware Interface)
+│   ├── server.py         # Main API Gateway
+│   └── processing/       # Data Normalization Logic
+├── config/               # YAML Configurations
+├── dashboard/            # React Source Code
+└── tests/                # Unit Tests for API endpoints
 ```
 
 ## 🤝 Contributing
-
-1.  Create an Issue.
-2.  Branch off `master` (`feat/issue-ID-description`).
-3.  Commit your changes.
-4.  Open a Pull Request.
+We welcome contributions that improve efficiency or add new hardware support.
+1.  Fork & Clone
+2.  Create Feature Branch (`git checkout -b feature/gpu-support`)
+3.  Commit Changes (`git commit -m 'feat: Add NVIDIA GPU monitoring'`)
+4.  Push & PR
 
 ---
-**License**: MIT
+*Demonstrating expertise in Hardware Abstraction, API Design, and Full Stack Development.*
