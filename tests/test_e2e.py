@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pytest
 import time
+import os
 from datetime import datetime
 
 def test_system_health_check_flow():
@@ -12,6 +13,9 @@ def test_system_health_check_flow():
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
+
+    # Ensure screenshot directory exists
+    os.makedirs("/tmp/screenshots", exist_ok=True)
 
     driver = webdriver.Chrome(options=chrome_options)
     
@@ -57,8 +61,13 @@ def test_system_health_check_flow():
         
         print("Health Check performed successfully and results displayed.")
         
+        # Capture Success Screenshot
+        driver.save_screenshot("/tmp/screenshots/success_health_check.png")
+        
     except Exception as e:
         print(f"Test Failed: {e}")
+        # Capture Failure Screenshot
+        driver.save_screenshot("/tmp/screenshots/failure_error.png")
         raise e
         
     finally:
